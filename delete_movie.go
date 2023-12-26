@@ -3,6 +3,8 @@ package main
 import (
 	"net/http"
 
+	"encoding/json"
+
 	"github.com/gorilla/mux"
 )
 
@@ -16,4 +18,5 @@ func deleteMovie(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
+	json.NewEncoder(w).Encode(movies)
 }
