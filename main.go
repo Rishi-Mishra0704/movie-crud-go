@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type Movie struct {
@@ -16,6 +20,12 @@ type Director struct {
 	Lastname  string `json:"lastname"`
 }
 
+var movies []Movie
+
 func main() {
-	fmt.Println("hello")
+	r := mux.NewRouter()
+	r.HandleFunc("/movies", getMovies).Methods("GET")
+
+	fmt.Println("Starting server on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
